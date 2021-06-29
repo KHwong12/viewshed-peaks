@@ -10,7 +10,7 @@ const map = new EsriMap({
 });
 
 // Custom elevation service
-var elevLyr = new ElevationLayer({
+const elevLyr = new ElevationLayer({
   url: "https://tiles.arcgis.com/tiles/6j1KwZfY2fZrfNMR/arcgis/rest/services/HK_DTM/ImageServer"
 });
 
@@ -82,20 +82,20 @@ const peaksNameLabel = [
         },
         size: 10
       })
-    ],
-    verticalOffset: {
-      screenLength: 50,
-      maxWorldLength: 500,
-      minWorldLength: 20
-    },
-    callout: {
-      type: "line",
-      size: "2px",
-      color: [86, 72, 31]
-    }
+      ],
+      verticalOffset: {
+        screenLength: 50,
+        maxWorldLength: 500,
+        minWorldLength: 20
+      },
+      callout: {
+        type: "line",
+        size: "2px",
+        color: [86, 72, 31]
+      }
     })
   })
-]
+];
 
 const peaks = new FeatureLayer({
   url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer",
