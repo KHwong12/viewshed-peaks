@@ -4,7 +4,10 @@
   "description": "Web map analysing visable area from peaks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch:build": "tsc -w",
+    "watch:server": "browser-sync start --server -w",
+    "lint": "tslint app/**/*.ts",
+    "start": "npm-run-all --parallel watch:build watch:server"
   },
   "repository": {
     "type": "git",
