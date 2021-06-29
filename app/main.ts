@@ -32,7 +32,7 @@ const view = new SceneView({
   }
 });
 
-const peaksPoppTemplate = {
+const peaksPopupTemplate = {
   // autocasts as new PopupTemplate()
   title: "{STN_NAME}",
   content: [
@@ -100,7 +100,7 @@ const peaksNameLabel = [
 const peaks = new FeatureLayer({
   url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer",
   outFields: ["*"],
-  popupTemplate: peaksPoppTemplate,
+  popupTemplate: peaksPopupTemplate,
   labelingInfo: peaksNameLabel
 });
 
