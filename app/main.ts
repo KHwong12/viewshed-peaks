@@ -30,8 +30,38 @@ const view = new SceneView({
   }
 });
 
+const peaksPoppTemplate = {
+  // autocasts as new PopupTemplate()
+  title: "{STN_NAME}",
+  content: [
+    {
+      type: "fields",
+      fieldInfos: [
+        {
+          fieldName: "STN_NAME",
+          label: "STN_NAME"
+        },
+        {
+          fieldName: "HKPD_m",
+          label: "HKPD_m"
+        },
+        {
+          fieldName: "Northing_m",
+          label: "Northing_m"
+        },
+        {
+          fieldName: "Easting_m",
+          label: "Easting_m"
+        }
+      ]
+    }
+  ]
+};
+
 const peaks = new FeatureLayer({
-  url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer"
+  url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer",
+  outFields: ["*"],
+  popupTemplate: peaksPoppTemplate
 });
 
 map.add(peaks);
