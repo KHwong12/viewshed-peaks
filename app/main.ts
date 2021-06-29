@@ -1,6 +1,7 @@
 import EsriMap from "esri/Map";
 import SceneView from "esri/views/SceneView";
 import ElevationLayer from "esri/layers/ElevationLayer";
+import FeatureLayer from "esri/layers/FeatureLayer";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -28,3 +29,9 @@ const view = new SceneView({
     heading: 345
   }
 });
+
+const peaks = new FeatureLayer({
+  url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer"
+});
+
+map.add(peaks);
