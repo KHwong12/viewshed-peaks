@@ -3,7 +3,13 @@ import SceneView from "esri/views/SceneView";
 import ElevationLayer from "esri/layers/ElevationLayer";
 import FeatureLayer from "esri/layers/FeatureLayer";
 import LabelClass from "esri/layers/support/LabelClass";
-import { LabelSymbol3D, TextSymbol3DLayer } from "esri/symbols";
+import { LabelSymbol3D, ObjectSymbol3DLayer, TextSymbol3DLayer } from "esri/symbols";
+import GraphicsLayer from "esri/layers/GraphicsLayer";
+import PointSymbol3D from "esri/symbols/PointSymbol3D";
+import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
+import Point from "esri/geometry/Point";
+import Graphic from "esri/Graphic";
+import PopupTemplate from "esri/PopupTemplate";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -32,8 +38,11 @@ const view = new SceneView({
   }
 });
 
-const peaksPopupTemplate = {
-  // autocasts as new PopupTemplate()
+const graphicsLayer = new GraphicsLayer();
+map.add(graphicsLayer);
+
+
+const peaksPopupTemplate = new PopupTemplate({
   title: "{STN_NAME}",
   content: [
     {
@@ -58,44 +67,41 @@ const peaksPopupTemplate = {
       ]
     }
   ]
-};
+});
 
-const peaksNameLabel = [
-  new LabelClass({
-    labelPlacement: "above-center",
-    // Return to new line with TextFormatting.NewLine
-    // https://community.esri.com/thread/187776-arcade-text-constant-for-textformattingnewline-is-adding-space-instead-of-new-line
-    labelExpressionInfo: {
-      expression: "$feature.STN_NAME + TextFormatting.NewLine + $feature.HKPD_m + 'm'"
-    },
-    symbol: new LabelSymbol3D({
-      symbolLayers: [new TextSymbol3DLayer({
-        material: {
-          color: [86, 72, 31]
-        },
-        halo: {
-          color: [244, 239, 227, 0.6],
-          size: "3px"
-        },
-        font: {
-          weight: "bold"
-        },
-        size: 10
-      })
-      ],
-      verticalOffset: {
-        screenLength: 50,
-        maxWorldLength: 500,
-        minWorldLength: 20
-      },
-      callout: {
-        type: "line",
-        size: "2px",
+const peaksNameLabel = new LabelClass({
+  labelPlacement: "above-center",
+  // Return to new line with TextFormatting.NewLine
+  // https://community.esri.com/thread/187776-arcade-text-constant-for-textformattingnewline-is-adding-space-instead-of-new-line
+  labelExpressionInfo: {
+    expression: "$feature.STN_NAME + TextFormatting.NewLine + $feature.HKPD_m + 'm'"
+  },
+  symbol: new LabelSymbol3D({
+    symbolLayers: new TextSymbol3DLayer({
+      material: {
         color: [86, 72, 31]
-      }
-    })
+      },
+      halo: {
+        color: [244, 239, 227, 0.6],
+        size: "3px"
+      },
+      font: {
+        weight: "bold"
+      },
+      size: 10
+    }),
+    verticalOffset: {
+      screenLength: 50,
+      maxWorldLength: 500,
+      minWorldLength: 20
+    },
+    callout: {
+      type: "line",
+      size: "2px",
+      color: [86, 72, 31]
+    }
   })
-];
+});
 
 const peaks = new FeatureLayer({
   url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer",
@@ -105,3 +111,51 @@ const peaks = new FeatureLayer({
 });
 
 map.add(peaks);
+
+/* add marker when user clicks on the map
+ */
+
+const selectedLocationSymbol = new PointSymbol3D({
+  symbolLayers: new ObjectSymbol3DLayer({
+    width: 150, // diameter of the object from east to west in meters
+    height: 150, // height of object in meters
+    depth: 150, // diameter of the object from north to south in meters
+    resource: {
+      primitive: "sphere"
+    },
+    material: {
+      color: [255, 0, 0, 0.9]
+    }
+  }),
+  verticalOffset: {
+    screenLength: 40,
+    minWorldLength: 150
+  },
+  // display a line to connect the symbol with its actual location
+  callout: new LineCallout3D({
+    size: 1.5,
+    color: [150, 150, 150, 0.8],
+    border: {
+      color: [50, 50, 50, 0.8]
+    }
+  })
+});
+
+view.on("click", showClickedLocation);
+
+function showClickedLocation(event) {
+  graphicsLayer.removeAll();
+
+  let selectedLocation = new Point({
+    longitude: event.mapPoint.longitude,
+    latitude: event.mapPoint.latitude
+  });
+
+  let selectedLocationGraphic = new Graphic({
+    geometry: selectedLocation,
+    symbol: selectedLocationSymbol
+  });
+
+  graphicsLayer.add(selectedLocationGraphic);
+};
+
