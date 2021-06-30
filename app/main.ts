@@ -9,6 +9,7 @@ import PointSymbol3D from "esri/symbols/PointSymbol3D";
 import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
 import Point from "esri/geometry/Point";
 import Graphic from "esri/Graphic";
+import PopupTemplate from "esri/PopupTemplate";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -41,8 +42,7 @@ const graphicsLayer = new GraphicsLayer();
 map.add(graphicsLayer);
 
 
-const peaksPopupTemplate = {
-  // autocasts as new PopupTemplate()
+const peaksPopupTemplate = new PopupTemplate({
   title: "{STN_NAME}",
   content: [
     {
@@ -67,7 +67,7 @@ const peaksPopupTemplate = {
       ]
     }
   ]
-};
+});
 
 const peaksNameLabel = new LabelClass({
   labelPlacement: "above-center",
