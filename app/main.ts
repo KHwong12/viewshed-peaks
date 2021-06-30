@@ -7,6 +7,8 @@ import { LabelSymbol3D, ObjectSymbol3DLayer, TextSymbol3DLayer } from "esri/symb
 import GraphicsLayer from "esri/layers/GraphicsLayer";
 import PointSymbol3D from "esri/symbols/PointSymbol3D";
 import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
+import Point from "esri/geometry/Point";
+import Graphic from "esri/Graphic";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -138,4 +140,22 @@ const selectedLocationSymbol = new PointSymbol3D({
     }
   })
 });
+
+view.on("click", showClickedLocation);
+
+function showClickedLocation(event) {
+  graphicsLayer.removeAll();
+
+  let selectedLocation = new Point({
+    longitude: event.mapPoint.longitude,
+    latitude: event.mapPoint.latitude
+  });
+
+  let selectedLocationGraphic = new Graphic({
+    geometry: selectedLocation,
+    symbol: selectedLocationSymbol
+  });
+
+  graphicsLayer.add(selectedLocationGraphic);
+};
 
