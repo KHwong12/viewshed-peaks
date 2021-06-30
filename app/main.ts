@@ -4,6 +4,9 @@ import ElevationLayer from "esri/layers/ElevationLayer";
 import FeatureLayer from "esri/layers/FeatureLayer";
 import LabelClass from "esri/layers/support/LabelClass";
 import { LabelSymbol3D, ObjectSymbol3DLayer, TextSymbol3DLayer } from "esri/symbols";
+import GraphicsLayer from "esri/layers/GraphicsLayer";
+import PointSymbol3D from "esri/symbols/PointSymbol3D";
+import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -31,6 +34,10 @@ const view = new SceneView({
     heading: 345
   }
 });
+
+const graphicsLayer = new GraphicsLayer();
+map.add(graphicsLayer);
+
 
 const peaksPopupTemplate = {
   // autocasts as new PopupTemplate()
@@ -102,3 +109,33 @@ const peaks = new FeatureLayer({
 });
 
 map.add(peaks);
+
+/* add marker when user clicks on the map
+ */
+
+const selectedLocationSymbol = new PointSymbol3D({
+  symbolLayers: new ObjectSymbol3DLayer({
+    width: 150, // diameter of the object from east to west in meters
+    height: 150, // height of object in meters
+    depth: 150, // diameter of the object from north to south in meters
+    resource: {
+      primitive: "sphere"
+    },
+    material: {
+      color: [255, 0, 0, 0.9]
+    }
+  }),
+  verticalOffset: {
+    screenLength: 40,
+    minWorldLength: 150
+  },
+  // display a line to connect the symbol with its actual location
+  callout: new LineCallout3D({
+    size: 1.5,
+    color: [150, 150, 150, 0.8],
+    border: {
+      color: [50, 50, 50, 0.8]
+    }
+  })
+});
+
