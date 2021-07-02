@@ -22,3 +22,8 @@ html, body {
   height: 100%;
   width: max(300px, 30%);
 }
+
+/* select all texts and other elements inside the side panel */
+#contentDiv > * {
+  margin: 5%;
+}
