@@ -214,8 +214,7 @@ const bookmarks = {
   }
 };
 
-
-Object.keys(bookmarks).forEach(function (key) {
+function setBookmarkView (key: string) {
   const bookmarkElement = document.getElementById(key);
 
   console.log(bookmarkElement);
@@ -226,4 +225,8 @@ Object.keys(bookmarks).forEach(function (key) {
       duration: 2000
     });
   });
+}
+
+Object.keys(bookmarks).forEach(function (key) {
+  setBookmarkView(key);
 });
