@@ -215,3 +215,15 @@ const bookmarks = {
 };
 
 
+Object.keys(bookmarks).forEach(function (key) {
+  const bookmarkElement = document.getElementById(key);
+
+  console.log(bookmarkElement);
+
+  bookmarkElement.addEventListener("click", function () {
+    const camera = bookmarks[key];
+    view.goTo(camera, {
+      duration: 2000
+    });
+  });
+});
