@@ -1,8 +1,32 @@
-html,
-body,
-#viewDiv {
+html, body {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+
+#viewDiv {
+  position: absolute;
+  right: 0;
+  /* min-width of contentDiv or current width of contentDiv */
+  left: max(300px, 30%);
+  top: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+#contentDiv {
+  display: block;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: max(300px, 30%);
+  /* scroll along contents for long descriptions */
+  overflow-y: auto;
+}
+
+/* select all texts and other elements inside the side panel */
+#contentDiv > * {
+  margin: 5%;
 }
