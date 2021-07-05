@@ -154,6 +154,11 @@ const viewshedFillSymbol = new SimpleFillSymbol({
 const viewshedAsyncGpUrl = "https://foa-arcgis.ad.arch.hku.hk/server/rest/services/CommonFunction/ViewshedHKDTM/GPServer/viewshed_50m";
 let viewshedAsyncGp = new Geoprocessor({ url: viewshedAsyncGpUrl });
 
+view.on("click", computeViewshed);
+
+
+function computeViewshed(event) {
+  // showClickedLocation
   graphicsLayer.removeAll();
 
   let selectedLocation = new Point({
