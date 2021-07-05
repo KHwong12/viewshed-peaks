@@ -16,9 +16,26 @@ import FeatureSet from "esri/tasks/support/FeatureSet";
 import Geoprocessor from "esri/tasks/Geoprocessor";
 import JobInfo from "esri/tasks/support/JobInfo";
 import ParameterValue from "esri/tasks/support/ParameterValue";
+import WebTileLayer from "esri/layers/WebTileLayer";
+import Basemap from "esri/Basemap";
 
+// Create a WebTileLayer with a third-party cached service
+const landsImageryLayer = new WebTileLayer({
+  urlTemplate: "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/xyz/imagery/wgs84/{z}/{x}/{y}.png",
+  copyright: "Lands Department"
+});
+
+// Create a Basemap with the WebTileLayer
+const hkImageryMap = new Basemap({
+  baseLayers: [landsImageryLayer],
+  title: "LandsD Imagery Map",
+  id: "lands-imagery"
+});
+
+// Add the custom basemap to the map
 const map = new EsriMap({
-  basemap: "satellite"
+  basemap: hkImageryMap
+  // ground: "world-elevation"
 });
 
 // Custom elevation service
@@ -41,6 +58,11 @@ const view = new SceneView({
     },
     tilt: 60,
     heading: 345
+  },
+  constraints: {
+    altitude: {
+      max: 80000
+    }
   }
 });
 
