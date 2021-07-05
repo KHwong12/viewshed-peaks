@@ -58,6 +58,11 @@ const view = new SceneView({
     },
     tilt: 60,
     heading: 345
+  },
+  constraints: {
+    altitude: {
+      max: 80000
+    }
   }
 });
 
