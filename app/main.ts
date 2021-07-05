@@ -10,6 +10,8 @@ import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
 import Point from "esri/geometry/Point";
 import Graphic from "esri/Graphic";
 import PopupTemplate from "esri/PopupTemplate";
+import SimpleFillSymbol from "esri/symbols/SimpleFillSymbol";
+import SimpleLineSymbol from "esri/symbols/SimpleLineSymbol";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -112,8 +114,7 @@ const peaks = new FeatureLayer({
 
 map.add(peaks);
 
-/* add marker when user clicks on the map
- */
+/* Initialise symbology for layers to be added on map */
 
 const selectedLocationSymbol = new PointSymbol3D({
   symbolLayers: new ObjectSymbol3DLayer({
@@ -141,7 +142,13 @@ const selectedLocationSymbol = new PointSymbol3D({
   })
 });
 
-view.on("click", showClickedLocation);
+const viewshedFillSymbol = new SimpleFillSymbol({
+  color: [255, 255, 251, 0.6],
+  outline: new SimpleLineSymbol({
+    color: [255, 255, 255],
+    width: 0.5
+  })
+});
 
 function showClickedLocation(event) {
   graphicsLayer.removeAll();
