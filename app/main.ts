@@ -172,5 +172,18 @@ function computeViewshed(event) {
   });
 
   graphicsLayer.add(selectedLocationGraphic);
+
+  // set up featureSet params for geoprocessing
+
+  // featureSet needs input params to be an array, thus create an array container
+  var inputGraphicContainer = [];
+  inputGraphicContainer.push(selectedLocationGraphic);
+
+  var featureSet = new FeatureSet();
+  featureSet.features = inputGraphicContainer;
+
+  var params = {
+    Input_Point: featureSet
+  };
 };
 
