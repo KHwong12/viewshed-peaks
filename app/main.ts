@@ -34,8 +34,8 @@ const hkImageryMap = new Basemap({
 
 // Add the custom basemap to the map
 const map = new EsriMap({
-  basemap: hkImageryMap,
-  ground: "world-elevation"
+  basemap: hkImageryMap
+  // ground: "world-elevation"
 });
 
 // Custom elevation service
