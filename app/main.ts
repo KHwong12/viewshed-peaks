@@ -220,5 +220,18 @@ function computeViewshed(event) {
 };
 
 function drawAsyncResultData (result: ParameterValue) {
-  // TODO
+  // result from async only have one layer, as we have defined which
+  // result layer to get in .getResultData
+  let resultFeatures = result.value.features;
+
+  console.log(resultFeatures);
+
+  // Assign the symbol of each reuslt graphics
+  let viewshedGraphics = resultFeatures.map(function (feature: Graphic) {
+    feature.symbol = viewshedFillSymbol;
+    return feature;
+  });
+
+  // Add reuslt graphics to the graphics layer
+  graphicsLayer.addMany(viewshedGraphics);
 };
