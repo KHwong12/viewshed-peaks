@@ -150,7 +150,10 @@ const viewshedFillSymbol = new SimpleFillSymbol({
   })
 });
 
-function showClickedLocation(event) {
+
+const viewshedAsyncGpUrl = "https://foa-arcgis.ad.arch.hku.hk/server/rest/services/CommonFunction/ViewshedHKDTM/GPServer/viewshed_50m";
+let viewshedAsyncGp = new Geoprocessor({ url: viewshedAsyncGpUrl });
+
   graphicsLayer.removeAll();
 
   let selectedLocation = new Point({
