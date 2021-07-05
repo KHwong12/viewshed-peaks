@@ -190,7 +190,23 @@ function computeViewshed(event) {
   viewshedAsyncGp
     .submitJob(params)
     .then((jobInfo: JobInfo) => {
-      // TODO
+      const jobid = jobInfo.jobId;
+
+      console.log(jobid);
+
+      const options = {
+        interval: 1500,
+        statusCallback: (j) => {
+          console.log("Job Status: ", j.jobStatus);
+        }
+      };
+
+      viewshedAsyncGp
+        // wait until the async job is completed
+        .waitForJobCompletion(jobid, options)
+        .then(() => {
+          // TODO
+        });
     });
 };
 
