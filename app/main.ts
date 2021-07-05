@@ -12,6 +12,10 @@ import Graphic from "esri/Graphic";
 import PopupTemplate from "esri/PopupTemplate";
 import SimpleFillSymbol from "esri/symbols/SimpleFillSymbol";
 import SimpleLineSymbol from "esri/symbols/SimpleLineSymbol";
+import FeatureSet from "esri/tasks/support/FeatureSet";
+import Geoprocessor from "esri/tasks/Geoprocessor";
+import JobInfo from "esri/tasks/support/JobInfo";
+import ParameterValue from "esri/tasks/support/ParameterValue";
 
 const map = new EsriMap({
   basemap: "satellite"
