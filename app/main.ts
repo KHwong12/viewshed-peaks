@@ -10,6 +10,12 @@ import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
 import Point from "esri/geometry/Point";
 import Graphic from "esri/Graphic";
 import PopupTemplate from "esri/PopupTemplate";
+import SimpleFillSymbol from "esri/symbols/SimpleFillSymbol";
+import SimpleLineSymbol from "esri/symbols/SimpleLineSymbol";
+import FeatureSet from "esri/tasks/support/FeatureSet";
+import Geoprocessor from "esri/tasks/Geoprocessor";
+import JobInfo from "esri/tasks/support/JobInfo";
+import ParameterValue from "esri/tasks/support/ParameterValue";
 
 const map = new EsriMap({
   basemap: "satellite"
@@ -112,8 +118,7 @@ const peaks = new FeatureLayer({
 
 map.add(peaks);
 
-/* add marker when user clicks on the map
- */
+/* Initialise symbology for layers to be added on map */
 
 const selectedLocationSymbol = new PointSymbol3D({
   symbolLayers: new ObjectSymbol3DLayer({
@@ -141,9 +146,23 @@ const selectedLocationSymbol = new PointSymbol3D({
   })
 });
 
-view.on("click", showClickedLocation);
+const viewshedFillSymbol = new SimpleFillSymbol({
+  color: [255, 255, 251, 0.6],
+  outline: new SimpleLineSymbol({
+    color: [255, 255, 255],
+    width: 0.5
+  })
+});
 
-function showClickedLocation(event) {
+
+const viewshedAsyncGpUrl = "https://foa-arcgis.ad.arch.hku.hk/server/rest/services/CommonFunction/ViewshedHKDTM/GPServer/viewshed_50m";
+let viewshedAsyncGp = new Geoprocessor({ url: viewshedAsyncGpUrl });
+
+view.on("click", computeViewshed);
+
+
+function computeViewshed(event) {
+  // showClickedLocation
   graphicsLayer.removeAll();
 
   let selectedLocation = new Point({
@@ -157,5 +176,66 @@ function showClickedLocation(event) {
   });
 
   graphicsLayer.add(selectedLocationGraphic);
+
+  // set up featureSet params for geoprocessing
+
+  // featureSet needs input params to be an array, thus create an array container
+  var inputGraphicContainer = [];
+  inputGraphicContainer.push(selectedLocationGraphic);
+
+  var featureSet = new FeatureSet();
+  featureSet.features = inputGraphicContainer;
+
+  var params = {
+    Input_Point: featureSet
+  };
+
+  // submit asnyc viewshed function to ArcGIS server
+  viewshedAsyncGp
+    .submitJob(params)
+    .then((jobInfo: JobInfo) => {
+      const jobid = jobInfo.jobId;
+
+      console.log(jobid);
+
+      const options = {
+        interval: 1500,
+        statusCallback: (j) => {
+          console.log("Job Status: ", j.jobStatus);
+        }
+      };
+
+      viewshedAsyncGp
+        // wait until the async job is completed
+        .waitForJobCompletion(jobid, options)
+        .then(() => {
+          console.log("Job Completed. Fetching results...");
+
+          // fetch the results from server
+          // request the results and get job status are two different steps
+          // see https://developers.arcgis.com/javascript/latest/api-reference/esri-tasks-Geoprocessor.html#getResultMapImageLayer
+          viewshedAsyncGp
+            .getResultData(jobid, "Output_Viewshed_Polygon")
+            .then((result) => {
+              drawAsyncResultData(result);
+            });
+        });
+    });
 };
 
+function drawAsyncResultData (result: ParameterValue) {
+  // result from async only have one layer, as we have defined which
+  // result layer to get in .getResultData
+  let resultFeatures = result.value.features;
+
+  console.log(resultFeatures);
+
+  // Assign the symbol of each reuslt graphics
+  let viewshedGraphics = resultFeatures.map(function (feature: Graphic) {
+    feature.symbol = viewshedFillSymbol;
+    return feature;
+  });
+
+  // Add reuslt graphics to the graphics layer
+  graphicsLayer.addMany(viewshedGraphics);
+};
