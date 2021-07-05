@@ -185,5 +185,12 @@ function computeViewshed(event) {
   var params = {
     Input_Point: featureSet
   };
+
+  // submit asnyc viewshed function to ArcGIS server
+  viewshedAsyncGp
+    .submitJob(params)
+    .then((jobInfo: JobInfo) => {
+      // TODO
+    });
 };
 
