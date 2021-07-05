@@ -205,8 +205,20 @@ function computeViewshed(event) {
         // wait until the async job is completed
         .waitForJobCompletion(jobid, options)
         .then(() => {
-          // TODO
+          console.log("Job Completed. Fetching results...");
+
+          // fetch the results from server
+          // request the results and get job status are two different steps
+          // see https://developers.arcgis.com/javascript/latest/api-reference/esri-tasks-Geoprocessor.html#getResultMapImageLayer
+          viewshedAsyncGp
+            .getResultData(jobid, "Output_Viewshed_Polygon")
+            .then((result) => {
+              drawAsyncResultData(result);
+            });
         });
     });
 };
 
+function drawAsyncResultData (result: ParameterValue) {
+  // TODO
+};
