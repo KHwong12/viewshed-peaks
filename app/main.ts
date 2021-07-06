@@ -216,6 +216,9 @@ function computeViewshed(event) {
   viewshedAsyncGp
     .submitJob(params)
     .then((jobInfo: JobInfo) => {
+      // show loading indicator gif
+      document.getElementById("loading").style.display = "block";
+
       const jobid = jobInfo.jobId;
 
       console.log(jobid);
@@ -240,6 +243,9 @@ function computeViewshed(event) {
             .getResultData(jobid, "Output_Viewshed_Polygon")
             .then((result) => {
               drawAsyncResultData(result);
+
+              // hide loading indicator gif
+              document.getElementById("loading").style.display = "none";
             });
         });
     });
