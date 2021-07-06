@@ -26,6 +26,15 @@ html, body {
   overflow-y: auto;
 }
 
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /*   reference point of image is on top-left, 
+  transform it to make center of image as reference point */
+  transform: translateY(-50%) translateX(-50%);
+}
+
 /* select all texts and other elements inside the side panel */
 #contentDiv > * {
   margin: 5%;
