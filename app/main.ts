@@ -18,6 +18,7 @@ import JobInfo from "esri/tasks/support/JobInfo";
 import ParameterValue from "esri/tasks/support/ParameterValue";
 import WebTileLayer from "esri/layers/WebTileLayer";
 import Basemap from "esri/Basemap";
+import Slider from "esri/widgets/Slider";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -146,6 +147,21 @@ map.add(peaks);
 queryDiv.style.display = "block";
 
 view.ui.add([queryDiv], "bottom-left");
+
+const bufferNumSlider = new Slider({
+  container: "bufferNum",
+  min: 1,
+  max: 20,
+  steps: 0.1,
+  visibleElements: {
+    labels: true
+  },
+  precision: 4,
+  labelFormatFunction: function (value, type) {
+    return value.toString() + "km";
+  },
+  values: [5]
+});
 
 /* Initialise symbology for layers to be added on map */
 
