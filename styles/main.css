@@ -26,6 +26,13 @@ html, body {
   overflow-y: auto;
 }
 
+#queryDiv {
+  position: absolute;
+  min-width: 250px;
+  padding: 10px;
+  display: none;
+}
+
 /* select all texts and other elements inside the side panel */
 #contentDiv > * {
   margin: 5%;
