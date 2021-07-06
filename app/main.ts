@@ -18,6 +18,7 @@ import JobInfo from "esri/tasks/support/JobInfo";
 import ParameterValue from "esri/tasks/support/ParameterValue";
 import WebTileLayer from "esri/layers/WebTileLayer";
 import Basemap from "esri/Basemap";
+import LinearUnit from "esri/tasks/support/LinearUnit";
 import Slider from "esri/widgets/Slider";
 
 // Create a WebTileLayer with a third-party cached service
@@ -245,8 +246,14 @@ function computeViewshed(event) {
   var featureSet = new FeatureSet();
   featureSet.features = inputGraphicContainer;
 
+  var viewshedDistance = new LinearUnit({
+    distance: bufferDistance,
+    units: "kilometers"
+  });
+
   var params = {
-    Input_Point: featureSet
+    Input_Point: featureSet,
+    Outer_radius: viewshedDistance
   };
 
   // submit asnyc viewshed function to ArcGIS server
