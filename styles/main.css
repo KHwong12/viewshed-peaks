@@ -33,6 +33,12 @@ html, body {
   /*   reference point of image is on top-left, 
   transform it to make center of image as reference point */
   transform: translateY(-50%) translateX(-50%);
+
+#queryDiv {
+  position: absolute;
+  min-width: 250px;
+  padding: 10px;
+  display: none;
 }
 
 /* select all texts and other elements inside the side panel */

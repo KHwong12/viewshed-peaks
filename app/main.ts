@@ -18,6 +18,8 @@ import JobInfo from "esri/tasks/support/JobInfo";
 import ParameterValue from "esri/tasks/support/ParameterValue";
 import WebTileLayer from "esri/layers/WebTileLayer";
 import Basemap from "esri/Basemap";
+import LinearUnit from "esri/tasks/support/LinearUnit";
+import Slider from "esri/widgets/Slider";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -140,6 +142,51 @@ const peaks = new FeatureLayer({
 
 map.add(peaks);
 
+/* Initialise buffer distance slider */
+
+// Assign scene layer once webscene is loaded and initialise query buttons
+queryDiv.style.display = "block";
+
+view.ui.add([queryDiv], "bottom-left");
+
+const bufferNumSlider = new Slider({
+  container: "bufferNum",
+  min: 1,
+  max: 20,
+  steps: 0.1,
+  visibleElements: {
+    labels: true
+  },
+  precision: 4,
+  labelFormatFunction: function (value, type) {
+    return value.toString() + "km";
+  },
+  values: [5]
+});
+
+// Set default buffer size
+var bufferDistance = 0;
+bufferDistance = bufferNumSlider.values[0];
+
+// Get user entered values for buffer
+bufferNumSlider.on(
+  ["thumb-change", "thumb-drag"],
+  bufferVariablesChanged
+);
+
+function bufferVariablesChanged (event) {
+  bufferDistance = event.value;
+}
+
+// Clear the geometry and set the default renderer
+document
+  .getElementById("clearGeometry")
+  .addEventListener("click", clearGeometry);
+
+function clearGeometry () {
+  graphicsLayer.removeAll();
+}
+
 /* Initialise symbology for layers to be added on map */
 
 const selectedLocationSymbol = new PointSymbol3D({
@@ -208,8 +255,14 @@ function computeViewshed(event) {
   var featureSet = new FeatureSet();
   featureSet.features = inputGraphicContainer;
 
+  var viewshedDistance = new LinearUnit({
+    distance: bufferDistance,
+    units: "kilometers"
+  });
+
   var params = {
-    Input_Point: featureSet
+    Input_Point: featureSet,
+    Outer_radius: viewshedDistance
   };
 
   // submit asnyc viewshed function to ArcGIS server
