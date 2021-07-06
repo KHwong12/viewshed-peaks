@@ -178,6 +178,15 @@ function bufferVariablesChanged (event) {
   bufferDistance = event.value;
 }
 
+// Clear the geometry and set the default renderer
+document
+  .getElementById("clearGeometry")
+  .addEventListener("click", clearGeometry);
+
+function clearGeometry () {
+  graphicsLayer.removeAll();
+}
+
 /* Initialise symbology for layers to be added on map */
 
 const selectedLocationSymbol = new PointSymbol3D({
