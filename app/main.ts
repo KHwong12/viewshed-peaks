@@ -163,6 +163,20 @@ const bufferNumSlider = new Slider({
   values: [5]
 });
 
+// Set default buffer size
+var bufferDistance = 0;
+bufferDistance = bufferNumSlider.values[0];
+
+// Get user entered values for buffer
+bufferNumSlider.on(
+  ["thumb-change", "thumb-drag"],
+  bufferVariablesChanged
+);
+
+function bufferVariablesChanged (event) {
+  bufferDistance = event.value;
+}
+
 /* Initialise symbology for layers to be added on map */
 
 const selectedLocationSymbol = new PointSymbol3D({
