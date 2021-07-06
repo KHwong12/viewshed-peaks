@@ -140,6 +140,13 @@ const peaks = new FeatureLayer({
 
 map.add(peaks);
 
+/* Initialise buffer distance slider */
+
+// Assign scene layer once webscene is loaded and initialise query buttons
+queryDiv.style.display = "block";
+
+view.ui.add([queryDiv], "bottom-left");
+
 /* Initialise symbology for layers to be added on map */
 
 const selectedLocationSymbol = new PointSymbol3D({
