@@ -319,6 +319,28 @@ function drawAsyncResultData (result: ParameterValue) {
 
   // Add reuslt graphics to the graphics layer
   graphicsLayer.addMany(viewshedGraphics);
+
+  /********************************************************************
+     * Animate to the result. This is a temporary workaround
+     * for animating to an array of graphics in a SceneView. In a future
+     * release, you will be able to replicate this behavior by passing
+     * the graphics directly to the goTo function, like the following:
+     *
+     * view.goTo(viewshedGraphics);
+     ********************************************************************/
+  view
+    .goTo({
+      target: viewshedGraphics,
+      // Point to north
+      heading: 0,
+      // Top view
+      tilt: 0
+    })
+    .catch(function (error) {
+      if (error.name !== "AbortError") {
+        console.error(error);
+      }
+    });
 };
 
 /* bookmarks */
