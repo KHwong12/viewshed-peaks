@@ -175,7 +175,7 @@ const bufferNumSlider = new Slider({
 });
 
 // Set default buffer size
-var bufferDistance = 0;
+let bufferDistance = 0;
 bufferDistance = bufferNumSlider.values[0];
 
 // Get user entered values for buffer
@@ -235,21 +235,21 @@ const viewshedFillSymbol = new SimpleFillSymbol({
 
 
 const viewshedAsyncGpUrl = "https://foa-arcgis.ad.arch.hku.hk/server/rest/services/CommonFunction/ViewshedHKDTM/GPServer/viewshed_50m";
-let viewshedAsyncGp = new Geoprocessor({ url: viewshedAsyncGpUrl });
+const viewshedAsyncGp = new Geoprocessor({ url: viewshedAsyncGpUrl });
 
 view.on("click", computeViewshed);
 
 
-function computeViewshed(event) {
+function computeViewshed (event) {
   // showClickedLocation
   graphicsLayer.removeAll();
 
-  let selectedLocation = new Point({
+  const selectedLocation = new Point({
     longitude: event.mapPoint.longitude,
     latitude: event.mapPoint.latitude
   });
 
-  let selectedLocationGraphic = new Graphic({
+  const selectedLocationGraphic = new Graphic({
     geometry: selectedLocation,
     symbol: selectedLocationSymbol
   });
@@ -259,18 +259,18 @@ function computeViewshed(event) {
   // set up featureSet params for geoprocessing
 
   // featureSet needs input params to be an array, thus create an array container
-  var inputGraphicContainer = [];
+  const inputGraphicContainer = [];
   inputGraphicContainer.push(selectedLocationGraphic);
 
-  var featureSet = new FeatureSet();
+  const featureSet = new FeatureSet();
   featureSet.features = inputGraphicContainer;
 
-  var viewshedDistance = new LinearUnit({
+  const viewshedDistance = new LinearUnit({
     distance: bufferDistance,
     units: "kilometers"
   });
 
-  var params = {
+  const params = {
     Input_Point: featureSet,
     Outer_radius: viewshedDistance
   };
@@ -323,12 +323,12 @@ function computeViewshed(event) {
 function drawAsyncResultData (result: ParameterValue) {
   // result from async only have one layer, as we have defined which
   // result layer to get in .getResultData
-  let resultFeatures = result.value.features;
+  const resultFeatures = result.value.features;
 
   console.log(resultFeatures);
 
   // Assign the symbol of each reuslt graphics
-  let viewshedGraphics = resultFeatures.map(function (feature: Graphic) {
+  const viewshedGraphics = resultFeatures.map(function (feature: Graphic) {
     feature.symbol = viewshedFillSymbol;
     return feature;
   });
