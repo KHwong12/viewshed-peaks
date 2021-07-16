@@ -72,7 +72,7 @@ a:hover,
 }  
 
 #queryDiv {
-  position: absolute;
+  position: relative;
   min-width: 250px;
   padding: 10px;
   display: none;
