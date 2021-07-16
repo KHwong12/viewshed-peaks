@@ -20,6 +20,7 @@ import WebTileLayer from "esri/layers/WebTileLayer";
 import Basemap from "esri/Basemap";
 import LinearUnit from "esri/tasks/support/LinearUnit";
 import Slider from "esri/widgets/Slider";
+import Expand from "esri/widgets/Expand";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -147,7 +148,16 @@ map.add(peaks);
 // Assign scene layer once webscene is loaded and initialise query buttons
 queryDiv.style.display = "block";
 
-view.ui.add([queryDiv], "bottom-left");
+const queryDivExpand = new Expand({
+  expandIconClass: "esri-icon-search",
+  view: view,
+  expanded: true,
+  content: queryDiv,
+  expandTooltip: "Expand the settings panel",
+  collapseTooltip: "Hide the settings panel"
+});
+
+view.ui.add(queryDivExpand, "bottom-left");
 
 const bufferNumSlider = new Slider({
   container: "bufferNum",

@@ -6,6 +6,35 @@ html, body {
   overflow: hidden;
 }
 
+body {
+  background-color: #f4efe3;
+  color: #56481f;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 2.5em;
+  line-height: 1.5;
+}
+
+footer {
+  font-size: 0.8em;
+  line-height: 1.3em;
+  border-top: 1px solid #56481f;
+  padding-top: 2em;
+  margin: 2em;
+}
+
+/* hyperlink and bookmarks */
+a,
+.indicator {
+  text-decoration: none;
+  border-bottom: 1px dashed #56481f;
+  cursor: pointer;
+}
+
+a:hover,
+.indicator:hover {
+  border-bottom: 1px solid #56481f;
+}
+
 #viewDiv {
   position: absolute;
   right: 0;
@@ -24,6 +53,13 @@ html, body {
   width: max(300px, 30%);
   /* scroll along contents for long descriptions */
   overflow-y: auto;
+  /* mysterious blank space on top of div */
+  top: 0;
+}
+
+/* select all texts and other elements inside the side panel */
+#contentDiv > * {
+  margin: 5%;
 }
 
 #loading {
@@ -36,13 +72,8 @@ html, body {
 }  
 
 #queryDiv {
-  position: absolute;
+  position: relative;
   min-width: 250px;
   padding: 10px;
   display: none;
-}
-
-/* select all texts and other elements inside the side panel */
-#contentDiv > * {
-  margin: 5%;
 }
