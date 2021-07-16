@@ -306,10 +306,16 @@ function computeViewshed(event) {
             .getResultData(jobid, "Output_Viewshed_Polygon")
             .then((result) => {
               drawAsyncResultData(result);
-
-              // hide loading indicator gif
-              document.getElementById("loading").style.display = "none";
             });
+        })
+        .catch((error) => {
+          alert("ERROR: Could not complete viewshed! Please try again later.");
+
+          console.error(error);
+        })
+        .finally(() => {
+          // hide loading indicator gif
+          document.getElementById("loading").style.display = "none";
         });
     });
 };
