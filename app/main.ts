@@ -19,7 +19,7 @@ import LinearUnit from "esri/tasks/support/LinearUnit";
 import Slider from "esri/widgets/Slider";
 import Expand from "esri/widgets/Expand";
 import { bookmarks, setBookmarkView } from "./bookmarks";
-import { peaks } from "./addItems";
+import { peaks } from "./addFeatures";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
