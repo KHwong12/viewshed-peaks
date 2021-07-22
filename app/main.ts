@@ -1,15 +1,12 @@
 import EsriMap from "esri/Map";
 import SceneView from "esri/views/SceneView";
 import ElevationLayer from "esri/layers/ElevationLayer";
-import FeatureLayer from "esri/layers/FeatureLayer";
-import LabelClass from "esri/layers/support/LabelClass";
-import { LabelSymbol3D, ObjectSymbol3DLayer, TextSymbol3DLayer } from "esri/symbols";
+import { ObjectSymbol3DLayer } from "esri/symbols";
 import GraphicsLayer from "esri/layers/GraphicsLayer";
 import PointSymbol3D from "esri/symbols/PointSymbol3D";
 import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
 import Point from "esri/geometry/Point";
 import Graphic from "esri/Graphic";
-import PopupTemplate from "esri/PopupTemplate";
 import SimpleFillSymbol from "esri/symbols/SimpleFillSymbol";
 import SimpleLineSymbol from "esri/symbols/SimpleLineSymbol";
 import FeatureSet from "esri/tasks/support/FeatureSet";
@@ -22,6 +19,7 @@ import LinearUnit from "esri/tasks/support/LinearUnit";
 import Slider from "esri/widgets/Slider";
 import Expand from "esri/widgets/Expand";
 import { bookmarks, setBookmarkView } from "./bookmarks";
+import { peaks } from "./addItems";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -73,74 +71,6 @@ const view = new SceneView({
 const graphicsLayer = new GraphicsLayer();
 map.add(graphicsLayer);
 
-
-const peaksPopupTemplate = new PopupTemplate({
-  title: "{STN_NAME}",
-  content: [
-    {
-      type: "fields",
-      fieldInfos: [
-        {
-          fieldName: "STN_NAME",
-          label: "STN_NAME"
-        },
-        {
-          fieldName: "HKPD_m",
-          label: "HKPD_m"
-        },
-        {
-          fieldName: "Northing_m",
-          label: "Northing_m"
-        },
-        {
-          fieldName: "Easting_m",
-          label: "Easting_m"
-        }
-      ]
-    }
-  ]
-});
-
-const peaksNameLabel = new LabelClass({
-  labelPlacement: "above-center",
-  // Return to new line with TextFormatting.NewLine
-  // https://community.esri.com/thread/187776-arcade-text-constant-for-textformattingnewline-is-adding-space-instead-of-new-line
-  labelExpressionInfo: {
-    expression: "$feature.STN_NAME + TextFormatting.NewLine + $feature.HKPD_m + 'm'"
-  },
-  symbol: new LabelSymbol3D({
-    symbolLayers: new TextSymbol3DLayer({
-      material: {
-        color: [86, 72, 31]
-      },
-      halo: {
-        color: [244, 239, 227, 0.6],
-        size: "3px"
-      },
-      font: {
-        weight: "bold"
-      },
-      size: 10
-    }),
-    verticalOffset: {
-      screenLength: 50,
-      maxWorldLength: 500,
-      minWorldLength: 20
-    },
-    callout: {
-      type: "line",
-      size: "2px",
-      color: [86, 72, 31]
-    }
-  })
-});
-
-const peaks = new FeatureLayer({
-  url: "https://services5.arcgis.com/xH8UmTNerx1qYfXM/arcgis/rest/services/trigo_peaks/FeatureServer",
-  outFields: ["*"],
-  popupTemplate: peaksPopupTemplate,
-  labelingInfo: peaksNameLabel
-});
 
 map.add(peaks);
 
