@@ -60,19 +60,21 @@ const view = new SceneView({
 const graphicsLayer = new GraphicsLayer();
 map.add(graphicsLayer);
 
-
+/* Add peaks from AGOL */
 map.add(peaks);
 
 /* Initialise buffer distance slider */
 
-// Assign scene layer once webscene is loaded and initialise query buttons
-queryDiv.style.display = "block";
+const queryPanel = document.getElementById("queryDiv");
+
+// TODO: Display queryDiv only after DOM content is fully loaded
+queryPanel.style.display = "block";
 
 const queryDivExpand = new Expand({
   expandIconClass: "esri-icon-search",
   view: view,
   expanded: true,
-  content: queryDiv,
+  content: queryPanel,
   expandTooltip: "Expand the settings panel",
   collapseTooltip: "Hide the settings panel"
 });
