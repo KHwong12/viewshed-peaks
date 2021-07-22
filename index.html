@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/map-theme.css">
+    <link rel="stylesheet" href="./styles/table.css">
     <script>
       var locationPath = location.pathname.replace(/\/[^/]*$/, "");
       window.dojoConfig = {
@@ -95,6 +96,12 @@
           </span>
         </li>
       </ul>
+
+      <h3>Current Visibility</h3>
+      <p>
+        Current visibility data are provided by <a target="_blank" href="https://www.hko.gov.hk/en/wxinfo/ts/display_element_vis.htm">Hong Kong Observatory</a>.
+      </p>
+      <div id="visibilityDiv"></div>
 
 
       <footer>
