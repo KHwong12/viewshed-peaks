@@ -168,13 +168,15 @@ const viewshedFillSymbol = new SimpleFillSymbol({
 const viewshedAsyncGpUrl = "https://foa-arcgis.ad.arch.hku.hk/server/rest/services/CommonFunction/ViewshedHKDTM/GPServer/viewshed_50m";
 const viewshedAsyncGp = new Geoprocessor({ url: viewshedAsyncGpUrl });
 
-view.on("click", computeViewshed);
+view.on("click", (event) => {
+  computeViewshed(event, bufferDistance, graphicsLayer);
+});
 
-
-function computeViewshed (event) {
-  // showClickedLocation
+function computeViewshed (event: any, bufferDistance: number, graphicsLayer: GraphicsLayer) {
+  // Remove all current graphic layers on map first
   graphicsLayer.removeAll();
 
+  // TODO: move to separate showClickedLocation function
   const selectedLocation = new Point({
     longitude: event.mapPoint.longitude,
     latitude: event.mapPoint.latitude
@@ -236,7 +238,7 @@ function computeViewshed (event) {
           viewshedAsyncGp
             .getResultData(jobid, "Output_Viewshed_Polygon")
             .then((result) => {
-              drawAsyncResultData(result);
+              drawAsyncResultData(view, result);
             });
         })
         .catch((error) => {
@@ -251,7 +253,7 @@ function computeViewshed (event) {
     });
 };
 
-function drawAsyncResultData (result: ParameterValue) {
+function drawAsyncResultData (view: SceneView, result: ParameterValue) {
   // result from async only have one layer, as we have defined which
   // result layer to get in .getResultData
   const resultFeatures = result.value.features;
