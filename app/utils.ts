@@ -22,6 +22,20 @@ fetch(weatherAPI)
       row.appendChild(headerCell);
     }
 
+    // Add data rows
+
+    // For each row (observation)
+    for (let i = 0; i < response.data.length; i++) {
+      row = visibilityTable.insertRow(-1);
+
+      // For each column (variable)
+      for (let j = 1; j < response.fields.length; j++) {
+        const cell = row.insertCell(-1);
+
+        cell.innerHTML = response.data[i][j];
+      }
+    }
+
     console.log(visibilityTable);
 
     // Add the html table to the div
