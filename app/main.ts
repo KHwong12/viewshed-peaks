@@ -9,6 +9,7 @@ import Expand from "esri/widgets/Expand";
 import { bookmarks, setBookmarkView } from "./bookmarks";
 import { peaks } from "./addFeatures";
 import { computeViewshed } from "./viewshed";
+import { generateVisibilityTable, weatherAPI } from "./visibility";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -131,3 +132,16 @@ view.on("click", (event) => {
 Object.keys(bookmarks).forEach(function (key) {
   setBookmarkView(view, key);
 });
+
+/* Show last modified date of HTML file */
+
+function showLastModified (span: HTMLElement) {
+  span.innerHTML = document.lastModified;
+}
+
+const lastModifiedHtml = document.getElementById("lastModified");
+showLastModified(lastModifiedHtml);
+
+/* Generate visibility table */
+
+generateVisibilityTable(weatherAPI);

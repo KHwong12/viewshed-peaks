@@ -1,4 +1,4 @@
-define(["require", "exports", "tslib", "esri/Map", "esri/views/SceneView", "esri/layers/ElevationLayer", "esri/layers/GraphicsLayer", "esri/layers/WebTileLayer", "esri/Basemap", "esri/widgets/Slider", "esri/widgets/Expand", "./bookmarks", "./addFeatures", "./viewshed"], function (require, exports, tslib_1, Map_1, SceneView_1, ElevationLayer_1, GraphicsLayer_1, WebTileLayer_1, Basemap_1, Slider_1, Expand_1, bookmarks_1, addFeatures_1, viewshed_1) {
+define(["require", "exports", "tslib", "esri/Map", "esri/views/SceneView", "esri/layers/ElevationLayer", "esri/layers/GraphicsLayer", "esri/layers/WebTileLayer", "esri/Basemap", "esri/widgets/Slider", "esri/widgets/Expand", "./bookmarks", "./addFeatures", "./viewshed", "./visibility"], function (require, exports, tslib_1, Map_1, SceneView_1, ElevationLayer_1, GraphicsLayer_1, WebTileLayer_1, Basemap_1, Slider_1, Expand_1, bookmarks_1, addFeatures_1, viewshed_1, visibility_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     Map_1 = tslib_1.__importDefault(Map_1);
@@ -104,5 +104,13 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/SceneView", "esri
     Object.keys(bookmarks_1.bookmarks).forEach(function (key) {
         bookmarks_1.setBookmarkView(view, key);
     });
+    /* Show last modified date of HTML file */
+    function showLastModified(span) {
+        span.innerHTML = document.lastModified;
+    }
+    var lastModifiedHtml = document.getElementById("lastModified");
+    showLastModified(lastModifiedHtml);
+    /* Generate visibility table */
+    visibility_1.generateVisibilityTable(visibility_1.weatherAPI);
 });
 //# sourceMappingURL=main.js.map
