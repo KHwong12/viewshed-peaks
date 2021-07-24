@@ -131,3 +131,12 @@ view.on("click", (event) => {
 Object.keys(bookmarks).forEach(function (key) {
   setBookmarkView(view, key);
 });
+
+/* Show last modified date of HTML file */
+
+function showLastModified (span: HTMLElement) {
+  span.innerHTML = document.lastModified;
+}
+
+const lastModifiedHtml = document.getElementById("lastModified");
+showLastModified(lastModifiedHtml);
