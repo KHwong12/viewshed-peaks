@@ -1,61 +1,59 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
-    <title>Where can you see from peaks?</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+  <title>Where can you see from peaks?</title>
 
-    <meta property="og:title" content="Where can you see from peaks?" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://khwong12.github.io/viewshed-peaks/" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/KHwong12/viewshed-peaks/master/img/opengraph-preview.png" />
-    <meta property="og:description" content="An interactive map application to discover where you can see from the peaks in Hong Kong." />
+  <meta property="og:title" content="Where can you see from peaks?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://khwong12.github.io/viewshed-peaks/" />
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/KHwong12/viewshed-peaks/master/img/opengraph-preview.png" />
+  <meta property="og:description"
+    content="An interactive map application to discover where you can see from the peaks in Hong Kong." />
 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/map-theme.css">
-    <link rel="stylesheet" href="./styles/table.css">
-    <script>
-      var locationPath = location.pathname.replace(/\/[^/]*$/, "");
-      window.dojoConfig = {
-        packages: [
-          {
-            name: "app",
-            location: locationPath + "/app"
-          }
-        ]
-      };
-    </script>
-    <script src="https://js.arcgis.com/4.19"></script>
-  </head>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" href="./styles/map-theme.css">
+  <link rel="stylesheet" href="./styles/table.css">
 
-  <body>
-    <div id="viewDiv">
-      <img style="display:none;" id="loading" src="https://i.stack.imgur.com/qq8AE.gif"/>
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+  <script>
+    var locationPath = location.pathname.replace(/\/[^/]*$/, "");
+    window.dojoConfig = {
+      packages: [
+        {
+          name: "app",
+          location: locationPath + "/app"
+        }
+      ]
+    };
+  </script>
+  <script src="https://js.arcgis.com/4.19"></script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxs-map-pin icon'></i>
+      <div class="logo_name">UrbanDataPalette</div>
+      <i class='bx bx-menu' id="collapse-button"></i>
     </div>
-
-    <div id="queryDiv" class="esri-widget">
-      <h3>Settings</h3>
-      <div class="tooltip">
-        <label for="bufferNum">Visibility</label>
-        <div id="bufferNum"></div>
-      </div>
-      <br />
-      <button class="esri-button" id="clearGeometry" type="button">
-        Clear Results
-      </button>
-    </div>
-
     <div id="contentDiv">
       <h1>Visibility from Peaks - Where and How Much Can You See?</h1>
 
       <p>
-        <b>NOTE: This application is best viewed on laptop/tablet with minimum width of 800 px. Mobile version of this app is ongoing development.</b>
+        <b>NOTE: This application is best viewed on laptop/tablet with minimum width of 800 px. Mobile version of this
+          app is ongoing development.</b>
       </p>
       <p>
-        With numerous amount of hills and peaks in Hong Kong, have you ever investigated <b>where</b> you can see when you reach the summit?
-        This application allows you to view and check where and how much you could see from the peaks with given visible distance.
+        With numerous amount of hills and peaks in Hong Kong, have you ever investigated <b>where</b> you can see when
+        you reach the summit?
+        This application allows you to view and check where and how much you could see from the peaks with given visible
+        distance.
       </p>
       <p>
         In the 3D map, the peaks are labelled with their names and height.
@@ -65,7 +63,8 @@
       <ol>
         <li>Drag and wander around the 3D map and investigate the topography Hong Kong.</li>
         <li>Click on the peaks (or any other places you like). A red pin will appear on the place you clicked.</li>
-        <li>The application will then compute the visible area (<i>viewshed</i> in jargon) from that point. The white grids appears on the map shows the area visible from the selected point.</li>
+        <li>The application will then compute the visible area (<i>viewshed</i> in jargon) from that point. The white
+          grids appears on the map shows the area visible from the selected point.</li>
         <li>Drag the slider to set your desired visibility (1-20km) to simulate how far you can see from the point.</li>
       </ol>
 
@@ -99,7 +98,8 @@
 
       <h3>Current Visibility</h3>
       <p>
-        Current visibility data are provided by <a target="_blank" href="https://www.hko.gov.hk/en/wxinfo/ts/display_element_vis.htm">Hong Kong Observatory</a>.
+        Current visibility data are provided by <a target="_blank"
+          href="https://www.hko.gov.hk/en/wxinfo/ts/display_element_vis.htm">Hong Kong Observatory</a>.
       </p>
       <div id="visibilityDiv"></div>
 
@@ -116,18 +116,37 @@
         <a href="https://developers.arcgis.com/javascript/" target="_blank">ArcGIS API for JavaScript</a>
         and ☕.
         <p>
-          Copyright Notice: Map from Lands Department 
-          <img style="display:inline-block;max-width:16px;" src="https://api.hkmapservice.gov.hk/mapapi/landsdlogo.jpg"> |
+          Copyright Notice: Map from Lands Department
+          <img style="display:inline-block;max-width:16px;" src="https://api.hkmapservice.gov.hk/mapapi/landsdlogo.jpg">
+          |
           Aerial Photograph from Lands Department |
           Earth Image from NASA Earth Observatory |
           Satellite Imagery from USGS/NASA Landsat
         </p>
-        
+
       </footer>
 
     </div>
 
-    <script>require(["app/main"]);</script>
-  </body>
+  </div>
+
+  <div id="viewDiv">
+    <img style="display:none;" id="loading" src="https://i.stack.imgur.com/qq8AE.gif" />
+  </div>
+
+  <div id="queryDiv" class="esri-widget">
+    <h3>Settings</h3>
+    <div class="tooltip">
+      <label for="bufferNum">Visibility</label>
+      <div id="bufferNum"></div>
+    </div>
+    <br />
+    <button class="esri-button" id="clearGeometry" type="button">
+      Clear Results
+    </button>
+  </div>
+
+  <script>require(["app/main"]);</script>
+</body>
 
 </html>

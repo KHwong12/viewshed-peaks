@@ -10,6 +10,7 @@ import { bookmarks, setBookmarkView } from "./bookmarks";
 import { peaks } from "./addFeatures";
 import { computeViewshed } from "./viewshed";
 import { generateVisibilityTable, weatherAPI } from "./visibility";
+import { changeMenuIcon } from "./ui";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -145,3 +146,17 @@ showLastModified(lastModifiedHtml);
 /* Generate visibility table */
 
 generateVisibilityTable(weatherAPI);
+
+/* sidebar */
+
+const sidebar = document.querySelector(".sidebar") as HTMLSelectElement;
+const collapseBtn = document.querySelector("#collapse-button") as HTMLSelectElement;
+
+// Show animation of expanding side panel when webpage is first initialised
+sidebar.classList.toggle("open");
+changeMenuIcon(sidebar, collapseBtn);
+
+collapseBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  changeMenuIcon(sidebar, collapseBtn);
+});
