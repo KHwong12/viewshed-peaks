@@ -145,3 +145,23 @@ showLastModified(lastModifiedHtml);
 /* Generate visibility table */
 
 generateVisibilityTable(weatherAPI);
+
+/* sidebar */
+
+const sidebar = document.querySelector(".sidebar") as HTMLSelectElement;
+const collapseBtn = document.querySelector("#collapse-button") as HTMLSelectElement;
+
+collapseBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  changeMenuIcon();
+});
+
+// Change sidebar button
+function changeMenuIcon () {
+  if (sidebar.classList.contains("open")) {
+    // change the icon from "menu" to "right-padded menu"
+    collapseBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    collapseBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+}
