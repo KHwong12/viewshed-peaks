@@ -34,22 +34,6 @@
   </head>
 
   <body>
-    <div id="viewDiv">
-      <img style="display:none;" id="loading" src="https://i.stack.imgur.com/qq8AE.gif"/>
-    </div>
-
-    <div id="queryDiv" class="esri-widget">
-      <h3>Settings</h3>
-      <div class="tooltip">
-        <label for="bufferNum">Visibility</label>
-        <div id="bufferNum"></div>
-      </div>
-      <br />
-      <button class="esri-button" id="clearGeometry" type="button">
-        Clear Results
-      </button>
-    </div>
-
     <div class="sidebar open">
       <div class="logo-details">
         <i class='bx bxs-map-pin icon'></i>
@@ -135,6 +119,23 @@
       </footer>
 
     </div>
+    
+  </div>
+
+  <div id="viewDiv">
+    <img style="display:none;" id="loading" src="https://i.stack.imgur.com/qq8AE.gif"/>
+  </div>
+
+  <div id="queryDiv" class="esri-widget">
+    <h3>Settings</h3>
+    <div class="tooltip">
+      <label for="bufferNum">Visibility</label>
+      <div id="bufferNum"></div>
+    </div>
+    <br />
+    <button class="esri-button" id="clearGeometry" type="button">
+      Clear Results
+    </button>
   </div>
 
     <script>require(["app/main"]);</script>
