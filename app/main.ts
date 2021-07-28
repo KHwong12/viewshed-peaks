@@ -151,6 +151,10 @@ generateVisibilityTable(weatherAPI);
 const sidebar = document.querySelector(".sidebar") as HTMLSelectElement;
 const collapseBtn = document.querySelector("#collapse-button") as HTMLSelectElement;
 
+// Show animation of expanding side panel when webpage is first initialised
+sidebar.classList.toggle("open");
+changeMenuIcon();
+
 collapseBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
   changeMenuIcon();
