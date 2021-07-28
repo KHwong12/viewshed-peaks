@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/map-theme.css">
     <link rel="stylesheet" href="./styles/table.css">
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
     <script>
       var locationPath = location.pathname.replace(/\/[^/]*$/, "");
       window.dojoConfig = {
@@ -47,6 +50,12 @@
       </button>
     </div>
 
+    <div class="sidebar open">
+      <div class="logo-details">
+        <i class='bx bxs-map-pin icon'></i>
+        <div class="logo_name">UrbanDataPalette</div>
+        <i class='bx bx-menu' id="collapse-button" ></i>
+      </div>
     <div id="contentDiv">
       <h1>Visibility from Peaks - Where and How Much Can You See?</h1>
 
@@ -126,6 +135,7 @@
       </footer>
 
     </div>
+  </div>
 
     <script>require(["app/main"]);</script>
   </body>
