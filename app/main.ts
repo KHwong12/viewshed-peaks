@@ -10,6 +10,7 @@ import { bookmarks, setBookmarkView } from "./bookmarks";
 import { peaks } from "./addFeatures";
 import { computeViewshed } from "./viewshed";
 import { generateVisibilityTable, weatherAPI } from "./visibility";
+import { changeMenuIcon } from "./ui";
 
 // Create a WebTileLayer with a third-party cached service
 const landsImageryLayer = new WebTileLayer({
@@ -153,19 +154,9 @@ const collapseBtn = document.querySelector("#collapse-button") as HTMLSelectElem
 
 // Show animation of expanding side panel when webpage is first initialised
 sidebar.classList.toggle("open");
-changeMenuIcon();
+changeMenuIcon(sidebar, collapseBtn);
 
 collapseBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
-  changeMenuIcon();
+  changeMenuIcon(sidebar, collapseBtn);
 });
-
-// Change sidebar button
-function changeMenuIcon () {
-  if (sidebar.classList.contains("open")) {
-    // change the icon from "menu" to "right-padded menu"
-    collapseBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-  } else {
-    collapseBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-  }
-}
