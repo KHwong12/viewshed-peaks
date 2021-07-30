@@ -63,6 +63,8 @@ define(["require", "exports", "tslib", "esri/Map", "esri/views/SceneView", "esri
         view: view,
         expanded: true,
         content: queryPanel,
+        // https://community.esri.com/t5/arcgis-api-for-javascript-questions/expand-widget-for-phone-screen/td-p/583206
+        mode: "floating",
         expandTooltip: "Expand the settings panel",
         collapseTooltip: "Hide the settings panel"
     });
