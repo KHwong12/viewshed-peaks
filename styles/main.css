@@ -98,7 +98,6 @@ a:hover,
 
 .sidebar .logo-details {
   height: 60px;
-  display: flex;
   align-items: center;
   position: relative;
 }
