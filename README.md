@@ -2,7 +2,7 @@
 
 A web map application for investigating visible areas from the peaks (and more) in Hong Kong
 
-<p text-align="center">
+<p style="text-align:center;font-size:30px;font-weight:700;">
   <a href="https://khwong12.github.io/viewshed-peaks/">
     CHECK THE WEB APPLICATION
   </a>
