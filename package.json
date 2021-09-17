@@ -33,6 +33,6 @@
     "typescript": "^4.3.4"
   },
   "dependencies": {
-    "@types/arcgis-js-api": "^4.19.0"
+    "@types/arcgis-js-api": "^4.20.1"
   }
 }
