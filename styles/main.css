@@ -1,6 +1,6 @@
-@import 'sidebar.css';
-@import 'map-theme.css';
-@import 'table.css';
+@import './sidebar.css';
+@import './map-theme.css';
+@import './table.css';
 
 html, body {
   padding: 0;
