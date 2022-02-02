@@ -1,7 +1,7 @@
-import FeatureLayer from "esri/layers/FeatureLayer";
-import LabelClass from "esri/layers/support/LabelClass";
-import PopupTemplate from "esri/PopupTemplate";
-import { LabelSymbol3D, TextSymbol3DLayer } from "esri/symbols";
+import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import LabelClass from "@arcgis/core/layers/support/LabelClass";
+import PopupTemplate from "@arcgis/core/PopupTemplate";
+import { LabelSymbol3D, TextSymbol3DLayer } from "@arcgis/core/symbols";
 
 const peaksPopupTemplate = new PopupTemplate({
   title: "{STN_NAME}",

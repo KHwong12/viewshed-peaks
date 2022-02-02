@@ -1,11 +1,11 @@
-import EsriMap from "esri/Map";
-import SceneView from "esri/views/SceneView";
-import ElevationLayer from "esri/layers/ElevationLayer";
-import GraphicsLayer from "esri/layers/GraphicsLayer";
-import WebTileLayer from "esri/layers/WebTileLayer";
-import Basemap from "esri/Basemap";
-import Slider from "esri/widgets/Slider";
-import Expand from "esri/widgets/Expand";
+import Map from "@arcgis/core/Map"
+import SceneView from "@arcgis/core/views/SceneView";
+import ElevationLayer from "@arcgis/core/layers/ElevationLayer";
+import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import WebTileLayer from "@arcgis/core/layers/WebTileLayer";
+import Basemap from "@arcgis/core/Basemap";
+import Slider from "@arcgis/core/widgets/Slider";
+import Expand from "@arcgis/core/widgets/Expand";
 import { bookmarks, setBookmarkView } from "./bookmarks";
 import { peaks } from "./addFeatures";
 import { computeViewshed } from "./viewshed";
@@ -26,7 +26,7 @@ const hkImageryMap = new Basemap({
 });
 
 // Add the custom basemap to the map
-const map = new EsriMap({
+const map = new Map({
   basemap: hkImageryMap
   // ground: "world-elevation"
 });
