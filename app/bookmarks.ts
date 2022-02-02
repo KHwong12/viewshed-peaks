@@ -1,4 +1,4 @@
-import SceneView from "esri/views/SceneView";
+import SceneView from "@arcgis/core/views/SceneView";
 
 export const bookmarks = {
   VICTORIA_HARBOUR: {

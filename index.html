@@ -19,18 +19,7 @@
 
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-  <script>
-    var locationPath = location.pathname.replace(/\/[^/]*$/, "");
-    window.dojoConfig = {
-      packages: [
-        {
-          name: "app",
-          location: locationPath + "/app"
-        }
-      ]
-    };
-  </script>
-  <script src="https://js.arcgis.com/4.19"></script>
+  <script type="module" src="/app/main.ts"></script>
 </head>
 
 <body>
@@ -144,7 +133,6 @@
     </button>
   </div>
 
-  <script>require(["app/main"]);</script>
 </body>
 
 </html>

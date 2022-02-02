@@ -1,7 +1,7 @@
 /* symbology of layers to be added on map */
 
-import { ObjectSymbol3DLayer, PointSymbol3D, SimpleFillSymbol, SimpleLineSymbol } from "esri/symbols";
-import LineCallout3D from "esri/symbols/callouts/LineCallout3D";
+import { ObjectSymbol3DLayer, PointSymbol3D, SimpleFillSymbol, SimpleLineSymbol } from "@arcgis/core/symbols";
+import LineCallout3D from "@arcgis/core/symbols/callouts/LineCallout3D";
 
 export const selectedLocationSymbol = new PointSymbol3D({
   symbolLayers: new ObjectSymbol3DLayer({

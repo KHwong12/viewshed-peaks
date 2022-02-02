@@ -1,12 +1,12 @@
-import { Point } from "esri/geometry";
-import Graphic from "esri/Graphic";
-import GraphicsLayer from "esri/layers/GraphicsLayer";
-import Geoprocessor from "esri/tasks/Geoprocessor";
-import FeatureSet from "esri/tasks/support/FeatureSet";
-import JobInfo from "esri/tasks/support/JobInfo";
-import LinearUnit from "esri/tasks/support/LinearUnit";
-import ParameterValue from "esri/tasks/support/ParameterValue";
-import SceneView from "esri/views/SceneView";
+import Point from "@arcgis/core/geometry/Point";
+import Graphic from "@arcgis/core/Graphic";
+import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import Geoprocessor from "@arcgis/core/tasks/Geoprocessor";
+import FeatureSet from "@arcgis/core/tasks/support/FeatureSet";
+import JobInfo from "@arcgis/core/tasks/support/JobInfo";
+import LinearUnit from "@arcgis/core/tasks/support/LinearUnit";
+import ParameterValue from "@arcgis/core/tasks/support/ParameterValue";
+import SceneView from "@arcgis/core/views/SceneView";
 import { selectedLocationSymbol, viewshedFillSymbol } from "./symbology";
 
 
