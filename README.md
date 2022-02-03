@@ -55,3 +55,9 @@ The spatial resolution of the visible area computed is 50 m. Digital elevation m
 ## Note
 
 this is the version 2.0 of the viewshed-from-peaks web map application. The old version is available at [https://github.com/KHwong12/HK_Peaks](https://github.com/KHwong12/HK_Peaks).
+
+---
+
+## Build the app locally
+
+TODO
