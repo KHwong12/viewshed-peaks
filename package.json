@@ -1,0 +1,42 @@
+{
+  "name": "viewshed-peaks",
+  "version": "0.0.1",
+  "description": "Web map analysing visable area from peaks",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch:build": "tsc -w",
+    "watch:server": "browser-sync start --server -w",
+    "lint": "eslint app/**/*.ts",
+    "start": "npm-run-all --parallel watch:build watch:server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KHwong12/viewshed-peaks.git"
+  },
+  "author": "Kenneth Wong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KHwong12/viewshed-peaks/issues"
+  },
+  "homepage": "https://github.com/KHwong12/viewshed-peaks#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "browser-sync": "^2.27.3",
+    "eslint": "^8.8.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "tslint": "^6.1.3",
+    "typescript": "^4.5.2",
+    "vite": "^2.7.13"
+  },
+  "dependencies": {
+    "@arcgis/core": "^4.22.2",
+    "@types/arcgis-js-api": "^4.20.1"
+  }
+}
