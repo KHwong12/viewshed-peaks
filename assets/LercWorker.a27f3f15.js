@@ -1,0 +1,1 @@
+import{r as s}from"./LercCodec.9e5bdb80.js";import"./vendor.d423bc92.js";class o{_decode(e){const r=s(e.buffer,e.options);return Promise.resolve({result:r,transferList:[r.pixelData.buffer]})}}function a(){return new o}export{a as default};
