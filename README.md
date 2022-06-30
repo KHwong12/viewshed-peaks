@@ -1,6 +1,6 @@
 # Viewshed from Peaks of Hong Kong
 
-![pages-build-deployment](https://github.com/KHwong12/viewshed-peaks/actions/workflows/pages/pages-build-deployment/badge.svg)
+[![Build and Deploy](https://github.com/KHwong12/viewshed-peaks/actions/workflows/deploy-gh-pages.yml/badge.svg)](https://github.com/KHwong12/viewshed-peaks/actions/workflows/deploy-gh-pages.yml)
 
 A web map application for computeing and investigating visible areas from the peaks (and more) in Hong Kong.
 
