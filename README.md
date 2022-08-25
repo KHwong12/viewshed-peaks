@@ -6,11 +6,11 @@ A web map application for computeing and investigating visible areas from the pe
 
 <p align="center">
   <a href="https://khwong12.github.io/viewshed-peaks/">
-    CHECK THE WEB APPLICATION
+    <b>CHECK THE WEB APPLICATION</b>
   </a>
 </p>
 
-![](./man/fig/overview.png)
+[![](./man/fig/overview.png)](https://khwong12.github.io/viewshed-peaks/)
 
 ## Overview
 
