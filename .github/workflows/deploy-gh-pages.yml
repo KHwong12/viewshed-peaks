@@ -34,7 +34,7 @@ jobs:
       
       - name: Deploy 🚀
         # deploy only for version 16.x
-        uses: JamesIves/github-pages-deploy-action@v4.6.1
+        uses: JamesIves/github-pages-deploy-action@v4.6.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
